@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
+FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 
 MAINTAINER Adam Tilghman <acms-consult@ucsd.edu>
 
@@ -58,6 +58,20 @@ RUN pip --no-cache-dir install \
         && \
     python -m ipykernel.kernelspec
 
+##############
+### CUDA 9 ###
+##############
+#RUN set -x
+#ENV CUDAREPO http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_9.0.176-1_amd64.deb
+#RUN P=/tmp/$(basename $CUDAREPO) && curl -s -o $P $CUDAREPO && dpkg -i $P && \
+#	apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub && \
+#	apt-get update && \
+#	apt-get install -y cuda-libraries-dev-9-0 cuda-compiler-9-0 cuda-minimal-build-9-0 cuda-command-line-tools-9-0 && \
+#	apt-get clean && \
+#	ln -s cuda-9.0 /usr/local/cuda && \
+#	ln -s /usr/lib64/nvidia/libcuda.so /usr/lib64/nvidia/libcuda.so.1 /usr/local/cuda/lib64/
+#############
+
 ########################################################
 # Additional packages requested by MUS 206
 RUN apt-get -qq update && apt-get -qq -y install \
@@ -65,8 +79,8 @@ RUN apt-get -qq update && apt-get -qq -y install \
 	openssh-client \
 	dnsutils iputils-ping \
 	wget \
-	cuda-core-8-0 \
-	cuda-command-line-tools-8-0
+	cuda-core-9-0 \
+	cuda-command-line-tools-9-0
 
 ########################################################
 # Install TensorFlow GPU version from their CI repository
