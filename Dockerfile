@@ -143,7 +143,7 @@ RUN apt-get update && apt-get -y install texlive-xetex
 ENV TEXMFVAR /tmp
 RUN apt-get update && apt-get -y install libgtk2.0-0
 
-RUN apt-get update && apt-get -y install opencv
+#RUN apt-get update && apt-get -y install opencv
 
 # clean conda cache last to free up space in the image
 RUN conda clean --all --yes
